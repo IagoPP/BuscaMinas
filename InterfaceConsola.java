@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class InterfaceConsola {
     public void printBoardCool(char[][] board){
         System.out.print("   ");
@@ -42,8 +44,28 @@ public class InterfaceConsola {
         BuscaMinas bm = new BuscaMinas();
         InterfaceConsola ic = new InterfaceConsola();
 
+        //game setup
         bm.placeMines();
         bm.placeNums();
-        ic.printBoardCool(bm.getBoard());
+        ic.printBoardCool(bm.getUserBoard());
+        ic.printBoardCool(bm.getGameBoard());
+        
+
+        //gameplay loop
+        Scanner sc = new Scanner(System.in);
+        int cx=sc.nextInt()-1;
+        int cy=sc.nextInt()-1;        
+
+        while (cx>0 && bm.getGameBoard()[cy][cx]!='*') {
+            if (bm.getGameBoard()[cy][cx]=='0'){
+                bm.revealZeroes(cx, cy);
+            }
+            bm.getUserBoard()[cy][cx]=bm.getGameBoard()[cy][cx];
+            ic.printBoardCool(bm.getUserBoard());
+
+            cx=sc.nextInt()-1;
+            cy=sc.nextInt()-1;
+        }
+        ic.printBoardCool(bm.getGameBoard());
     }
 }
