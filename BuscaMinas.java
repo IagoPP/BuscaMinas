@@ -107,21 +107,25 @@ public class BuscaMinas {
         int sy = cy;
 
         while (true) {
-            if (sy < gameBoard.length - 1 && (gameBoard[sy + 1][sx] == '0')) {
+            if (sy < gameBoard.length - 1 && (gameBoard[sy + 1][sx] == '0')) {  
                 userBoard[sy][sx]='0';
                 sy++;
+                checkTouching(sy, sx);
                 gameBoard[sy][sx] = '↑';
             } else if (sx < gameBoard[0].length - 1 && (gameBoard[sy][sx + 1] == '0')) {
                 userBoard[sy][sx]='0';
                 sx++;
+                checkTouching(sy, sx);
                 gameBoard[sy][sx] = '←';
             } else if (sy > 0 && (gameBoard[sy - 1][sx] == '0')) {
                 userBoard[sy][sx]='0';
                 sy--;
+                checkTouching(sy, sx);
                 gameBoard[sy][sx] = '↓';
             } else if (sx > 0 && (gameBoard[sy][sx - 1] == '0')) {
                 userBoard[sy][sx]='0';
                 sx--;
+                checkTouching(sy, sx);
                 gameBoard[sy][sx] = '→';
             } else if (sy < gameBoard.length - 1 && gameBoard[sy][sx] == '↓') {
                 userBoard[sy][sx]='0';
