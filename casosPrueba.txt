@@ -27,3 +27,44 @@
 ---+---+---+---+---+---+---+---+---+
 006|   |   |   |   | 1 | 0 | 1 |   |
 ---+---+---+---+---+---+---+---+---+
+
+---+---+---+---+---+---+---+---+---+
+001| 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 |
+---+---+---+---+---+---+---+---+---+
+002| 0 | 0 | 0 | 0 | 0 | 1 | 1 | * |
+---+---+---+---+---+---+---+---+---+
+003| 1 | 1 | 0 | 0 | 0 | 0 | * | 2 |
+---+---+---+---+---+---+---+---+---+
+004| * | 1 | 0 | 0 | 0 | 2 | 2 | 2 |
+---+---+---+---+---+---+---+---+---+
+005| 2 | 2 | 1 | 0 | 0 | 0 | * | 1 |
+---+---+---+---+---+---+---+---+---+
+006| 1 | * | 1 | 0 | 0 | 1 | 1 | 1 |
+---+---+---+---+---+---+---+---+---+
+
+
+//troubleling positions: 3, 4 && 4, 5
+005|001|002|003|004|005|006|007|008|
+---+---+---+---+---+---+---+---+---+
+001| 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+---+---+---+---+---+---+---+---+---+
+002| 0 | 0 | 0 | 1 | 1 | 1 | 0 | 0 |
+---+---+---+---+---+---+---+---+---+
+003| 0 | 0 | 0 | 1 | * | 2 | 1 | 1 |
+---+---+---+---+---+---+---+---+---+
+004| 0 | 0 | 0 | 1 | 2 | 3 | * | 1 |
+---+---+---+---+---+---+---+---+---+
+005| 1 | 1 | 1 | 0 | 1 | * | 3 | 2 |
+---+---+---+---+---+---+---+---+---+
+006| 1 | * | 1 | 0 | 1 | 2 | * | 1 |
+---+---+---+---+---+---+---+---+---+
+
+
+missing functionalities:
+// click on revealed number (completed?)
+// reveal every number wincon (add conditioms to checkTouching(), userMinesLeft) (completed?)
+// remove character 'X' prunt on revealZeroes issue (may be related to previous satatement) (completed)
+// end of game interface (win message for win and lose message + reveal only mines + precious revealed number + hit mine marker on lose)
+// alternative checkAround/revealZeroes code (move cx/cy around as ypu check positions)
+
+vscode multicursor
