@@ -61,10 +61,7 @@
 
 
 missing functionalities:
-// click on revealed number (completed?)
-// reveal every number wincon (add conditioms to checkTouching(), userMinesLeft) (completed?)
-// remove character 'X' prunt on revealZeroes issue (may be related to previous satatement) (completed)
-// end of game interface (win message for win and lose message + reveal only mines + precious revealed number + hit mine marker on lose)
 // alternative checkAround/revealZeroes code (move cx/cy around as ypu check positions)
+// revealAround should check if flags correspond number to work
 
-vscode multicursor
+vscode multicursor (alt+left click)
