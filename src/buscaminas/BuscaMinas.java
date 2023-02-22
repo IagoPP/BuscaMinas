@@ -1,3 +1,4 @@
+package src.buscaminas;
 import java.util.Random;
 
 public class BuscaMinas {
@@ -16,7 +17,7 @@ public class BuscaMinas {
     private char[][] gameBoard;
     private char[][] userBoard;
 
-    BuscaMinas() {
+    public BuscaMinas() {
         mina = '*';
         blank = ' ';
         minesLeft = tMinas;

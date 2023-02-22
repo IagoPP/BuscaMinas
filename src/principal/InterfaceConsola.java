@@ -1,4 +1,7 @@
+package src.principal;
 import java.util.Scanner;
+
+import src.buscaminas.BuscaMinas;
 
 public class InterfaceConsola {
     //imprimir tablero
