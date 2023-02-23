@@ -123,6 +123,9 @@ public class BuscaMinas {
     /** Recoje el atributo "action" y coordenadas del tablero para decidir que tipo de accion se hara sobre esa casilla */
     public void chooseAction(char action, int cx, int cy){
         if (action==reveal){
+            if (userBoard[cy][cx]==flagout){
+                minesLeft++;
+            }
             if (Character.isDigit(userBoard[cy][cx]) && Character.getNumericValue(userBoard[cy][cx])>0){
                 revealAround(cy, cx);
             }
@@ -139,11 +142,15 @@ public class BuscaMinas {
                 minesLeft--;
             }
         }else if (action==questionin){
+            if (userBoard[cy][cx]==flagout){
+                minesLeft++;
+            }
             if (userBoard[cy][cx]==questionout){
                 userBoard[cy][cx]=blank;
             }else if (Character.isDigit(userBoard[cy][cx])==false){
                 userBoard[cy][cx]=questionout;
             }
+
         }
     }
 
