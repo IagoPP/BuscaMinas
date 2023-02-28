@@ -1,7 +1,7 @@
 package src.buscaminas;
 import java.util.Random;
 
-/** Logica necesaria para crear un programa de busaminas */
+/** Logica necesaria para crear un programa de buscaminas.*/
 public class BuscaMinas {
     private int tMinas;
     private char mina;
@@ -18,7 +18,7 @@ public class BuscaMinas {
     private char[][] gameBoard;
     private char[][] userBoard;
 
-    /** Inicializar atributos predeterminadamente */
+    /** Inicializa valores predeterminados de los atributos que pueden tomar las casillas del tablero */
     public BuscaMinas() {
         mina = '*';
         blank = ' ';
@@ -33,7 +33,7 @@ public class BuscaMinas {
         loseCheck = false;
     }
 
-    /** Crea tableros de juego y usuaro dadas las columnas, filas y el total de minas */
+    /** Crea tableros de juego y usuario vacíos (todos los valores equivaldran a un caracter de espacio) dados el número de columnas, filas y el total de minas */
     public void setUpBoards(int x, int y, int minas){
         userBoard = new char[y][x];
         gameBoard = new char[y][x];
@@ -44,7 +44,7 @@ public class BuscaMinas {
         createBlankBoard(gameBoard);
     }
     /** Rellena las casillas de un tablero con el atributo "blank" */
-    public void createBlankBoard(char[][] board) {
+    private void createBlankBoard(char[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 board[i][j] = blank;
@@ -68,7 +68,7 @@ public class BuscaMinas {
         }
     }
 
-    /** Coloca en el tablero de juego los numeros correspondientes a las minas previamente introducidas */
+    /** Rellena cada casilla del tablero de juego que no sea una mina con un número según con cuantas minas esté en contacto */
     public void placeNums() {
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[0].length; j++) {
@@ -120,7 +120,9 @@ public class BuscaMinas {
         }
     }
 
-    /** Recoje el atributo "action" y coordenadas del tablero para decidir que tipo de accion se hara sobre esa casilla */
+    /** Recoge coordenadas de una casilla del tablero, y un caracter para decidir que tipo de accion se hara sobre ella
+     * (revelar una casilla: 'r', poner una bandera: 'f' y poner una interrogación: '?')
+     */
     public void chooseAction(char action, int cx, int cy){
         if (action==reveal){
             if (userBoard[cy][cx]==flagout){
@@ -154,8 +156,8 @@ public class BuscaMinas {
         }
     }
 
-    /** pasa al el tablero de usuario desde el de juego todos los numeros 0 que toquen a un 0 determinado por unas coordenadas dadas del tablero */
-    public void revealZeroes(int cx, int cy) {
+    /** Pasa al el tablero de usuario desde el de juego todos los numeros 0 que toquen a un 0 determinado por unas coordenadas dadas del tablero */
+    private void revealZeroes(int cx, int cy) {
 
         int sx = cx;
         int sy = cy;
@@ -207,20 +209,36 @@ public class BuscaMinas {
     }
 
     /** Comprueba todas las casillas que rodeen a un 0 dadas sus cordenadas y pasa sus valores del tablero de juego al de usuario  */
-    public void checkTouching(int sy, int sx){
-        if (sy < gameBoard.length - 1 && Character.isDigit(gameBoard[sy+1][sx]) && Character.getNumericValue(gameBoard[sy+1][sx])>0) {userBoard[sy+1][sx]=gameBoard[sy+1][sx];}
-        if (sx < gameBoard[0].length - 1  && Character.isDigit(gameBoard[sy][sx+1]) && Character.getNumericValue(gameBoard[sy][sx+1])>0) {userBoard[sy][sx+1]=gameBoard[sy][sx+1]; }
-        if (sy > 0  && Character.isDigit(gameBoard[sy-1][sx]) && Character.getNumericValue(gameBoard[sy-1][sx])>0) {userBoard[sy-1][sx]=gameBoard[sy-1][sx]; }
-        if (sx > 0  && Character.isDigit(gameBoard[sy][sx-1]) && Character.getNumericValue(gameBoard[sy][sx-1])>0) {userBoard[sy][sx-1]=gameBoard[sy][sx-1]; }
-        if (sy < gameBoard.length - 1 && sx < gameBoard[0].length - 1  && Character.isDigit(gameBoard[sy+1][sx+1]) && Character.getNumericValue(gameBoard[sy+1][sx+1])>0) {userBoard[sy+1][sx+1]=gameBoard[sy+1][sx+1]; }
-        if (sy > 0 && sx > 0  && Character.isDigit(gameBoard[sy-1][sx-1]) && Character.getNumericValue(gameBoard[sy-1][sx-1])>0) {userBoard[sy-1][sx-1]=gameBoard[sy-1][sx-1]; }
-        if (sy < gameBoard.length - 1 && sx > 0 && Character.isDigit(gameBoard[sy+1][sx-1]) && Character.getNumericValue(gameBoard[sy+1][sx-1])>0) {userBoard[sy+1][sx-1]=gameBoard[sy+1][sx-1]; }
-        if (sy > 0 && sx < gameBoard[0].length - 1 && Character.isDigit(gameBoard[sy-1][sx+1]) && Character.getNumericValue(gameBoard[sy-1][sx+1])>0) {userBoard[sy-1][sx+1]=gameBoard[sy-1][sx+1]; }
+    private void checkTouching(int sy, int sx){
+        if (sy < gameBoard.length - 1 && Character.isDigit(gameBoard[sy+1][sx]) && Character.getNumericValue(gameBoard[sy+1][sx])>0) {
+            userBoard[sy+1][sx]=gameBoard[sy+1][sx];
+        }
+        if (sx < gameBoard[0].length - 1  && Character.isDigit(gameBoard[sy][sx+1]) && Character.getNumericValue(gameBoard[sy][sx+1])>0) {
+            userBoard[sy][sx+1]=gameBoard[sy][sx+1];
+        }
+        if (sy > 0  && Character.isDigit(gameBoard[sy-1][sx]) && Character.getNumericValue(gameBoard[sy-1][sx])>0) {
+            userBoard[sy-1][sx]=gameBoard[sy-1][sx];
+        }
+        if (sx > 0  && Character.isDigit(gameBoard[sy][sx-1]) && Character.getNumericValue(gameBoard[sy][sx-1])>0) {
+            userBoard[sy][sx-1]=gameBoard[sy][sx-1];
+        }
+        if (sy < gameBoard.length - 1 && sx < gameBoard[0].length - 1  && Character.isDigit(gameBoard[sy+1][sx+1]) && Character.getNumericValue(gameBoard[sy+1][sx+1])>0) {
+            userBoard[sy+1][sx+1]=gameBoard[sy+1][sx+1];
+        }
+        if (sy > 0 && sx > 0  && Character.isDigit(gameBoard[sy-1][sx-1]) && Character.getNumericValue(gameBoard[sy-1][sx-1])>0) {
+            userBoard[sy-1][sx-1]=gameBoard[sy-1][sx-1];
+        }
+        if (sy < gameBoard.length - 1 && sx > 0 && Character.isDigit(gameBoard[sy+1][sx-1]) && Character.getNumericValue(gameBoard[sy+1][sx-1])>0) {
+            userBoard[sy+1][sx-1]=gameBoard[sy+1][sx-1];
+        }
+        if (sy > 0 && sx < gameBoard[0].length - 1 && Character.isDigit(gameBoard[sy-1][sx+1]) && Character.getNumericValue(gameBoard[sy-1][sx+1])>0) {
+            userBoard[sy-1][sx+1]=gameBoard[sy-1][sx+1];
+        }
     }
 
-    /** dadas las coordenadas de una casilla pasa al tablero de usuario los parametros contenidos en 
+    /** Dadas las coordenadas de una casilla pasa al tablero de usuario los parametros contenidos en 
     tablero de juego a todas las que la rodeen siempre que su contenido no coincida con el atributo "flagout"  */
-    public void revealAround(int sy, int sx){
+    private void revealAround(int sy, int sx){
         if (sy < gameBoard.length - 1 && (Character.isDigit(gameBoard[sy+1][sx]) || gameBoard[sy+1][sx]=='*') && userBoard[sy+1][sx]!=flagout) {
             userBoard[sy+1][sx]=gameBoard[sy+1][sx];
             if (userBoard[sy+1][sx]=='*') {checkedMine(sy+1, sx);}
@@ -264,7 +282,7 @@ public class BuscaMinas {
     }
 
     /** Determina si se encontro una mina al usar el metodo "revealAround" */
-    public void checkedMine(int sy, int sx){
+    private void checkedMine(int sy, int sx){
         userBoard[sy][sx]=loseMineOut;
         loseCheck=true;
     }
@@ -286,8 +304,7 @@ public class BuscaMinas {
         }
     }
 
-    /** Copia las casillas con el atributo "mina" del tablero de juego en el tablero de usuario (excepto las que coincidan en el tablero de usuario con el atributo "flagout"), 
-    e indica las que no coincidan con el atributo "flagout" con un caracter dado*/
+    /** Enseña las minas que no se han cubierto con una bandera, la mina que ha hecho perder al jugador y las banderas mal puestas con un caracter dado */
     public void loseBoard(char failedMine){
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[0].length; j++) {
@@ -301,15 +318,15 @@ public class BuscaMinas {
         }
     }
 
-    /** devuelve el array bidimensional en el que se almacenan los parametros del Tablero de Usuario */
+    /** Devuelve el array bidimensional en el que se almacenan los parametros del Tablero de Usuario */
     public char[][] getUserBoard() {
         return this.userBoard;
     }
-    /** devuelve el array bidimensional en el que se almacenan los parametros del Tablero de Juego */
+    /** Devuelve el array bidimensional en el que se almacenan los parametros del Tablero de Juego */
     public char[][] getGameBoard() {
         return this.gameBoard;
     }
-    /** Devuelve el numero minas que quedan por marcar con una casilla bandera */
+    /** Devuelve el numero de minas que quedan por marcar con una casilla bandera */
     public int getMinesLeft() {
         return minesLeft;
     }
@@ -317,27 +334,15 @@ public class BuscaMinas {
     public char getMina() {
         return mina;
     }
-    /** devuelve el parametro que usa el programa para determinar que una casilla del tablero de usuario esta vacia */
-    public char getBlank() {
-        return blank;
-    }
-    /** devuelve el parametro asociado a la accion de revelar casillas del tablero de usuario usado por el metodo "chooseAction" */
+    /** Devuelve el parametro asociado a la accion de revelar casillas del tablero de usuario usado por el metodo "chooseAction" */
     public char getReveal() {
         return reveal;
     }
-    /** devuelve el parametro asociado a la accion de poner una bandera en el tablero de usuario usado por el metodo "chooseAction" */
-    public char getFlagin() {
-        return flagin;
-    }
-    /** devuelve el parametro asociado a la accion de poner una interrogación en el tablero de usuario usado por el metodo "chooseAction" */
-    public char getQuestionin() {
-        return questionin;
-    }
-    /** Devuelve el valor del atributo "action" */
+    /** Devuelve el valor del atributo "action" usado por el metodo "chooseAction" para determinar la accion que se hara sobre una casilla dadas sus coordenadas*/
     public char getAction() {
         return action;
     }
-    /** Devuelve true si se ha revelado una mina al usar el metodo "revealAround" */
+    /** Devuelve true si se ha revelado una mina al seleccionar una casilla numérica ya revelada */
     public boolean getLoseCheck(){
         return loseCheck;
     }
@@ -346,7 +351,7 @@ public class BuscaMinas {
         return loseMineOut;
     }
 
-    /** Recoge el valor del atributo action que determinara la accion a tomar en el metodo "chooseAction" */
+    /** Recoge el valor del atributo "action" que determinara la accion a tomar en el metodo "chooseAction" */
     public void setAction(char action) {
         this.action = action;
     }
